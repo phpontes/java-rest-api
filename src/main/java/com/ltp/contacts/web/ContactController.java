@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import com.ltp.contacts.pojo.Contact;
 import com.ltp.contacts.service.ContactService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,4 +24,9 @@ public class ContactController {
         return new ResponseEntity<>(contact, HttpStatus.OK);
     }
     
+    @PostMapping("/contact")
+    public ResponseEntity<HttpStatus> createContact(@RequestBody Contact contact) {
+        contactService.saveContact(contact);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }
